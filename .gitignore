@@ -3,3 +3,5 @@ output
 bak
 0448_ply/*
 0448_masks_static/*
+
+!.gitkeep
