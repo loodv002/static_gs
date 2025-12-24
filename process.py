@@ -4,11 +4,9 @@ from tqdm import tqdm
 import numpy as np
 
 from src.file_io import read_camera_colibs, read_ply, write_ply
-from src.utils import filter_frame, inverse_ids
+from src.utils import filter_frame, inverse_ids, get_n_frames
 
 os.chdir(Path(__file__).parent)
-
-N_FRAMES = 59
 
 PLY_INPUT_DIR = Path('./0448_ply')
 MASK_INPUT_DIR = Path('./0448_masks_static')
@@ -16,6 +14,8 @@ TRANSFORMS_PATH = Path('./transforms.json')
 
 PLY_OUTPUT_DIR = Path('./output')
 if not PLY_OUTPUT_DIR.exists(): PLY_OUTPUT_DIR.mkdir(parents=True)
+
+N_FRAMES = get_n_frames(PLY_INPUT_DIR)
 
 camera_colibs = read_camera_colibs(TRANSFORMS_PATH)
 

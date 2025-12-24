@@ -4,6 +4,17 @@ from typing import Dict, Any
 
 from src.file_io import read_mask
 
+def get_n_frames(ply_input_dir: Path):
+    ply_count = 0
+    max_frame = -1
+    for file in ply_input_dir.iterdir():
+        if file.suffix == '.ply': 
+            ply_count += 1
+            max_frame = max(max_frame, int(file.stem.split('_')[1]))
+    
+    assert ply_count == max_frame + 1, 'Number of .ply and maximum frame number mismatch'
+    return ply_count
+
 def project_points(points_world, camera_colib):
     c2w = np.asarray(camera_colib['transform_matrix'], dtype=np.float64)
     w2c = np.linalg.inv(c2w)
